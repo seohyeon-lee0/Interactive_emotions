@@ -1,0 +1,255 @@
+body {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: white;
+}
+
+.container {
+	width: 80vmin;
+	height: calc(80vmin * 1359 / 1302); /* 비율 유지 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	width: 100%;
+	height: 100%;
+	gap: calc(5% / 2); /* 총 여백 5% */
+}
+
+/* 좌우 화살표 위치 */
+.arrow {
+	position: fixed;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 64px;
+	height: 64px;
+	cursor: pointer;
+	z-index: 1000;
+}
+
+.arrow-left {
+	left: 16px;
+}
+
+.arrow-right {
+	right: 16px;
+}
+
+.cell-1, .cell-2, .cell-3, .cell-4, .cell-5, .cell-6, .cell-7, .cell-8, .cell-9 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	overflow: visible; /* 필요 시 hidden 처리 */
+}
+
+.cell-1 img { width: 100%; height: 100%; }
+.cell-2 img { width: 100%; height: 100%; }
+.cell-3 img { width: 100%; height: 100%; }
+.cell-4 img { width: 100%; height: 100%; }
+.cell-5 img { width: 100%; height: 100%; }
+.cell-6 img { width: 100%; height: 100%; }
+.cell-7 img { width: 80%; height: 80%; margin-left: 0px; }
+.cell-8 img { width: 100%; height: 100%; margin-left: 5px; }
+.cell-9 img { width: 99%; height: 99%; object-fit: contain; }
+
+/* 3-2 꽃 애니메이션 */
+#img32 {
+	/*width: 85%;*/
+	/*padding-top: 35px;*/
+	animation: bounceUpDown 2s infinite ease-in-out;
+}
+
+/* 3-3 꽃 Squish/Stretch 애니메이션 */
+#img33 {
+	/*width: 85%;
+	height: auto;*/
+	transform-origin: center;
+	animation: squishStretch 2.2s ease-in-out infinite;
+}
+
+/* 3-4 밤톨 바운스 애니메이션 */
+#img34 {
+	/*width: 85%;
+	height: auto;*/
+	transform-origin: center;
+	animation: squishBounce 1.5s ease-in-out infinite;
+}
+
+/* 3-5 중심 꽃 Pulse 애니메이션 */
+#img35 {
+	/*width: 90%;
+	height: auto; */
+	transform-origin: center;
+	animation: centerPulse 2.8s ease-in-out infinite;
+}
+
+/* 3-7 제자리에서 빙글빙글 */
+#img37 {
+	animation: spinImage 2.5s linear infinite;
+	transform-origin: center center;
+}
+
+/* 3-8 햇살 플래시 효과 */
+#img38 {
+	/*width: 90%;
+	height: auto;*/
+	animation: flashSun 1.8s ease-in-out infinite;
+}
+
+/* 3-9 나비 펄럭 애니메이션 */
+#img39 {
+	/*width: 90%;*/
+	transform-origin: center center;
+	animation: flapOnce 1s ease-in-out 0s 1 forwards,
+			   flapLoop 1.5s ease-in-out 1.2s infinite;
+}
+
+/* 첫 펄럭 (접혔다가 펴지기) */
+@keyframes flapOnce {
+	0% {
+		transform: scaleX(1);
+	}
+	50% {
+		transform: scaleX(0); /* 완전히 접힘 */
+	}
+	100% {
+		transform: scaleX(1); /* 다시 펴짐 */
+	}
+}
+
+/* 무한 반복 펄럭 */
+@keyframes flapLoop {
+	0% {
+		transform: scaleX(1);
+	}
+	50% {
+		transform: scaleX(0.2);
+	}
+	100% {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes bounceUpDown {
+	0% {
+		transform: translateY(0);
+	}
+	30% {
+		transform: translateY(-35px); /* 위로 슈웅 */
+	}
+	50% {
+		transform: translateY(-15px); /* 약간 내려오다 멈칫 */
+	}
+	70% {
+		transform: translateY(-25px); /* 다시 올라감 */
+	}
+	100% {
+		transform: translateY(0); /* 착지 */
+	}
+}
+
+@keyframes squishStretch {
+	0%, 45% {
+		transform: scale(1, 1); /* 1초 정지 (약 45%) */
+	}
+	55% {
+		transform: scale(1.15, 0.85); /* 눌림 */
+	}
+	70% {
+		transform: scale(0.95, 1.1); /* 튐 */
+	}
+	85% {
+		transform: scale(1.05, 0.95); /* 반동 */
+	}
+	100% {
+		transform: scale(1, 1); /* 복귀 */
+	}
+}
+
+@keyframes squishBounce {
+	0%, 100% {
+		transform: scale(1, 1);
+	}
+	30% {
+		transform: scale(1.15, 0.85); /* 눌림 */
+	}
+	50% {
+		transform: scale(0.95, 1.1);  /* 튐 */
+	}
+	70% {
+		transform: scale(1.05, 0.95); /* 반동 */
+	}
+}
+
+@keyframes spinImage {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes centerPulse {
+	0%, 100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.08);
+		opacity: 0.9;
+	}
+}
+
+
+@keyframes flashSun {
+	0%, 100% {
+	  opacity: 1;
+	  filter: brightness(1);
+	}
+	50% {
+	  opacity: 0.6;
+	  filter: brightness(1.3);
+	}
+}
+
+
+/*
+@keyframes flashSun {
+	0%, 12.5%, 25%, 37.5%, 50%, 62.5%, 75%, 87.5%, 100% {
+		opacity: 1;
+		filter: brightness(1);
+	}
+	6.25%, 18.75%, 31.25%, 43.75%, 56.25%, 68.75%, 81.25%, 93.75% {
+		opacity: 0.6;
+		filter: brightness(1.3);
+	}
+}
+*/
+/*
+@keyframes flashSun {
+	0%, 25%, 50%, 75%, 100% {
+		opacity: 1;
+		filter: brightness(1);
+	}
+	6.25%, 31.25%, 56.25%, 81.25% {
+		opacity: 0.95;
+		filter: brightness(1.2);
+	}
+	12.5%, 37.5%, 62.5%, 87.5% {
+		opacity: 0.9;
+		filter: brightness(1.3);
+	}
+}
+*/
